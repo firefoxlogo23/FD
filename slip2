@@ -83,3 +83,94 @@
 </html>
 
 
+
+
+
+import { BrowserModule } 
+	from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } 
+	from '@angular/common/http';
+import { AppRoutingModule }
+	from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AddInputComponent }
+	from './add-input/add-input.component';
+import { ShowApiComponent }
+	from './show-api/show-api.component';
+
+@NgModule({
+	declarations: [
+		AppComponent,
+		ShowApiComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
+})
+export class AppModule { }
+app.component.ts:
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+@Component({
+	selector: 'app-show-api',
+	templateUrl: './show-api.component.html',
+	styleUrls: ['./show-api.component.css']
+})
+export class ShowApiComponent implements OnInit {
+	li: any;
+	lis = [];
+	constructor(private http: HttpClient) {
+
+	}
+	ngOnInit(): void {
+		this.http.get(
+			'http://...com')
+			.subscribe(Response =& gt; {
+
+			// If response comes hideloader() function is called
+			// to hide that loader 
+			if (Response) {
+				hideloader();
+			}
+			console.log(Response)
+			this.li = Response;
+			this.lis = this.li.list;
+		});
+		function hideloader() {
+			document.getElementById('loading').style.display = 'none';
+		}
+	}
+}
+app.component.html:
+<h1>Registered Employees</h1>
+<div class="d-flex justify-content-center">
+	<div class="spinner-border" role="status">
+		<span class="sr-only" id="loading">
+			Loading...
+		</span>
+	</div>
+</div>
+
+<table class="table" id='tab'>
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Position</th>
+			<th scope="col">Office</th>
+			<th scope="col">Salary</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let e of lis;">
+			<td>{{ e.name }}</td>
+			<td>{{ e.position }}</td>
+			<td>{{ e.office }}</td>
+			<td>{{ e.salary }}</td>
+		</tr>
+	</tbody>
+</table>
