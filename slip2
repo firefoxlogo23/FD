@@ -1,0 +1,85 @@
+ <!DOCTYPE html> 
+
+<html> 
+<script src= "C:\angular-1.8.0\angular-1.8.0\angular.js"> 
+  </script> 
+<style> 
+    body { 
+        margin: 2%; 
+        font-size: 120%; 
+    }       
+    th, 
+   td { 
+        padding: 20px; 
+    } 
+</style> 
+<body ng-app="myApp" ng-controller="ListController"> 
+    <h1>Bank Details</h1> 
+    <table border=1> 
+        <thead> 
+            <tr> 
+                <th>S.No</th> 
+                <th>Name</th> 
+                <th>MICR Code</th> 
+                <th>IFSC Code</th> 
+                <th>Address</th> 
+            </tr> 
+        </thead> 
+        <tr ng-repeat="i in bank"> 
+            <td> {{i.sno}} </td> 
+            <td> {{i.name}} </td> 
+            <td> {{i.micr}} </td> 
+            <td> {{i.ifsc}} </td> 
+            <td> {{i.address}} </td> 
+        </tr> 
+    </table>   
+</body> 
+<script> 
+    var app = angular.module('myApp', []); 
+    app.controller( 
+      'ListController', function($scope) { 
+        $scope.bank = [{ 
+                sno: 1, 
+                name: 'SBI', 
+                micr: 'sbi123', 
+                ifsc: 9876563454, 
+                address: "satara", 
+
+            }, { 
+
+                sno: 2, 
+                name: 'BOI', 
+                micr: 'boi123', 
+                ifsc: 7865452396, 
+                address: "Pune", 
+
+            }, { 
+
+                sno: 3, 
+                name: 'RBI', 
+                micr: 'rbi123', 
+                ifsc: 7865452316, 
+                address: "kolhapur", 
+
+            }, { 
+
+                sno: 4, 
+                name: 'BOM', 
+                micr: 'bom123', 
+                ifsc: 7765458921, 
+                address: "goa", 
+
+            }, { 
+
+                sno: 5, 
+                name: 'BOB',          
+               micr: 'bob123', 
+                ifsc: 7765458921, 
+                address: "satara", 
+            } 
+        ]; 
+    }); 
+</script> 
+</html>
+
+
